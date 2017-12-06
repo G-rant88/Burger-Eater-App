@@ -2,28 +2,30 @@
 <h1>Eat Dat Burg!</h1>
 
 <ul class="left">
-  {{#each burgs}}
   <li>
-    <p>
-      {{id}}. {{burger_name}}
-
-      <button class="waves-effect waves-light btn" data-burgid="{{id}}" class="delburg">Devour it!</button>
+    {{#each burgers}}
+    <form action="/dev" method="POST">
+    <p class="burghere"><span class="borders">
+      {{id}}. {{burger_name}}</span>
+      <button class="waves-effect waves-light btn" name="{{id}}" class="delburg">Devour it!</button>
     </p>
-  </li>
+  </form>
   {{/each}}
+  </li>
 </ul>
 
 <ul class="right">
   {{#each burgseat}}
   <li>
-    <p id="burghere">
+    <p class="burgdev">
       {{id}}. {{burger_name}}
     </p>
   </li>
   {{/each}}
 </ul>
-<div class="input-field col s6">
-<textarea class="materialize-textarea" type="text" name="burger" placeholder="Big Mac"></textarea>
-  <button class="waves-effect waves-light btn" type="submit">Submit</button>
-</div>
+
+<form id="addburg" class="input-field col s6" action="/add" method="POST">
+<textarea class="materialize-textarea" type="text" name="burgeradd" placeholder="Big Mac"></textarea>
+  <button class="waves-effect waves-light btn" type="submit" id="burgsub"/>Submit</button>
+</form>
 <p id="p1">Enter the burger you want to eat and click Submit!</p>
