@@ -12,6 +12,10 @@
 
 <p>Adding a burger inserts a new burger into the db.</p>
 
+<p>Regurgitating sets the devoured to false and puts it on the left side.</p>
+
+<p>Going to bathroom deletes from the mysql table where devoured is true.</p>
+
 <p>the burgers are ordered by their id in the db.</p>
 
 <p>Have fun eating those burgs!</p>
