@@ -53,7 +53,6 @@ var not = [];
     }
 
 for (var i = 0; i < data.length; i++) {
-console.log(data[i].devoured)
 if(JSON.parse(data[i].devoured) === 0) {
 
 not.push(data[i]);
@@ -80,6 +79,14 @@ app.post("/add", function(req, res){
 app.put("/devs/:id", function(req, res){
 
 	connection.query("UPDATE burgers SET devoured = ? WHERE id = ?", [true, req.body.ids], function(err, data) {
+res.end();
+});
+});
+
+
+app.put("/reg/:id", function(req, res){
+
+  connection.query("UPDATE burgers SET devoured = ? WHERE id = ?", [false, req.body.ids], function(err, data) {
 res.end();
 });
 });

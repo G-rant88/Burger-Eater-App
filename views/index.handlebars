@@ -18,8 +18,8 @@
 <ul class="right">
   {{#each Dev.devy}}
   <li>
-    <p class="burgdev z-depth-4">
-      {{id}}. {{burger_name}}
+    <p><button class="waves-effect waves-light btn regburg z-depth-5 red pulse" id={{id}}>Regurgitate it!</button> <span class="borders z-depth-4 burgdev"">
+      {{id}}. {{burger_name}}</span>
     </p>
   </li>
   {{/each}}
@@ -35,7 +35,7 @@
   
  $(".devburg").on("click", function(event) {
 
-  Materialize.toast('YUM!', 10000);
+  Materialize.toast('YUM!', 80000);
 
     var id = $(this).attr("id");
     console.log(id);
@@ -56,8 +56,30 @@
 
  $("#burgsub").on("click", function(event) {
 
-  Materialize.toast('Oh Yeah!', 10000);
+  Materialize.toast('Oh Yeah!', 80000);
 
 });
+
+
+  $(".regburg").on("click", function(event) {
+
+  Materialize.toast('GROSS!', 80000);
+
+    var id = $(this).attr("id");
+    console.log(id);
+    var dats ={
+      ids: id
+    }
+    // Send the PUT request.s
+    $.ajax("/reg/" + id, {
+      type: "PUT",
+      data: dats
+    }).then(
+      function() {
+        console.log("regurgitated at id ", id);
+        location.reload();
+      }
+    );
+  });
 
 </script>
