@@ -91,6 +91,14 @@ res.end();
 });
 });
 
+app.delete("/del/", function(req, res){
+
+  connection.query("DELETE FROM burgers where devoured =? ", [true], function(err, data) {
+console.log("emptied");
+res.end();
+});
+});
+
 app.listen(PORT, function() {
   console.log("burger app listening on port", PORT);
 });
