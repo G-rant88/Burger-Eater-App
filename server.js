@@ -69,9 +69,6 @@ app.post("/add", function(req, res){
 
 app.put("/devs/:id", function(req, res){
 
-	console.log(req.body);
-  console.log(req.body.ids);
-
 	connection.query("UPDATE burgers SET devoured = ? WHERE id = ?", [true, req.body.ids], function(err, data) {
 res.end();
 });
