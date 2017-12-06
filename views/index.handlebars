@@ -1,7 +1,7 @@
 
 <img id="burgimg" src="/assets/img/burger.jpg">
 <h1>Eat Dat Burg!</h1>
-<div><button class="waves-effect waves-light btn z-depth-5 red pulse" type="button" id="bathroom"/>Go To Bathroom</button></div>
+<div><button class="waves-effect waves-light btn z-depth-5 red" type="button" id="bathroom"/>Go To Bathroom</button></div>
 
 <ul class="left">
   <li>
@@ -35,7 +35,7 @@
   
  $(".devburg").on("click", function(event) {
 
-  Materialize.toast('YUM!', 80000);
+  Materialize.toast('YUM!', 100000);
 
     var id = $(this).attr("id");
     console.log(id);
@@ -56,14 +56,14 @@
 
  $("#burgsub").on("click", function(event) {
 
-  Materialize.toast('Oh Yeah!', 80000);
+  Materialize.toast('Oh Yeah!', 100000);
 
 });
 
 
   $(".regburg").on("click", function(event) {
 
-  Materialize.toast('GROSS!', 80000);
+  Materialize.toast('GROSS!', 100000);
 
     var id = $(this).attr("id");
     console.log(id);
@@ -84,7 +84,7 @@
 
     $("#bathroom").on("click", function(event) {
 
-  Materialize.toast('EMPTIED OUT!', 80000);
+  Materialize.toast('EMPTIED OUT!', 100000);
 
     // Send the PUT request.s
     $.ajax("/del/", {
