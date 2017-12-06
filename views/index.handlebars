@@ -6,9 +6,9 @@
   <li>
     {{#each Dev.devn}}
     <form>
-    <p class="burghere"><span class="borders">
+    <p class="burghere"><span class="borders z-depth-4">
       {{id}}. {{burger_name}}</span>
-      <button class="waves-effect waves-light btn devburg" id={{id}}>Devour it!</button>
+      <button class="waves-effect waves-light btn devburg z-depth-5 cyan pulse" id={{id}}>Devour it!</button>
     </p>
   </form>
   {{/each}}
@@ -18,7 +18,7 @@
 <ul class="right">
   {{#each Dev.devy}}
   <li>
-    <p class="burgdev">
+    <p class="burgdev z-depth-4">
       {{id}}. {{burger_name}}
     </p>
   </li>
@@ -27,13 +27,15 @@
 
 <form id="addburg" class="input-field col s6" action="/add" method="POST">
 <textarea class="materialize-textarea" type="text" name="burgeradd" placeholder="Burger Name"></textarea>
-  <button class="waves-effect waves-light btn" type="submit" id="burgsub"/>Submit</button>
+  <button class="waves-effect waves-light btn z-depth-5" type="submit" id="burgsub"/>Submit</button>
 </form>
 <p id="p1">Enter the burger you want to eat and click Submit!</p>
 
 <script type="text/javascript">
   
  $(".devburg").on("click", function(event) {
+
+  Materialize.toast('YUM!', 10000);
 
     var id = $(this).attr("id");
     console.log(id);
@@ -52,5 +54,10 @@
     );
   });
 
+ $("#burgsub").on("click", function(event) {
+
+  Materialize.toast('Oh Yeah!', 10000);
+
+});
 
 </script>
