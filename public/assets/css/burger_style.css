@@ -1,0 +1,42 @@
+body{
+
+	background-color: lemonchiffon;
+}
+
+h1{
+
+	color: dodgerblue;
+	font-size: 30px;
+}
+
+.container{
+
+	margin: 0 auto;
+	text-align: center;
+}
+
+#burgimg{
+
+	height: 170px;
+	width: 170px;
+}
+
+#p1{
+
+	color: dodgerblue;
+}
+
+.input-field{
+
+	width: 70%;
+	margin: 0 auto;
+
+}
+
+#burghere{
+	
+	color: dodgerblue;
+	font-size: 15px;
+}
+
+}

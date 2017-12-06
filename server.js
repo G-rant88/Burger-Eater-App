@@ -6,4 +6,21 @@ var app = express();
 var PORT = process.env.PORT || 3000;;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-var methodOverride = require('method-override');
+
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+var mysql = require("mysql");
+
+app.use(express.static('public'))
+
+app.get("/",function(req, res){
+
+	 res.render("index");
+})
+
+app.listen(PORT, function() {
+  console.log("burger app listening on port", PORT);
+});

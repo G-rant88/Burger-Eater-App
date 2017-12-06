@@ -1,6 +1,6 @@
 var orm = require("../config/orm.js");
 
-var burger = "";
+module.exports = burger;
 
 orm.insertOne(burger);
 
@@ -8,4 +8,3 @@ orm.updateOne(burger);
 
 orm.selectAll(burger);
 
-module.exports = burger;
