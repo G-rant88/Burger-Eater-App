@@ -32,8 +32,28 @@ app.use(express.static('public'))
 
 app.get("/",function(req, res){
 	connection.query("SELECT * FROM burgers;", function(err, data) {
+ 
+ var yes = [];
+var not = [];
 
-	 res.render("index", {burgers:data});
+  var Dev = {
+
+      devy: yes,
+      devn: not
+    }
+
+for (var i = 0; i < data.length; i++) {
+console.log(data[i].devoured)
+if(JSON.parse(data[i].devoured) === 0) {
+
+not.push(data[i]);
+}   else{
+
+yes.push(data[i]);
+}
+}
+
+	 res.render("index", {Dev});
 });
 
 });
@@ -47,18 +67,15 @@ app.post("/add", function(req, res){
 
 });
 
-app.post("/dev", function(req, res){
+app.put("/devs/:id", function(req, res){
+
 	console.log(req.body);
-	// console.log(req.body.burger_name);
+  console.log(req.body.ids);
 
-	connection.query("UPDATE burgers SET devoured =? WHERE burger_name =?", [true, req.body.burger_name], function(err, data) {
-
-	res.redirect("/");
+	connection.query("UPDATE burgers SET devoured = ? WHERE id = ?", [true, req.body.ids], function(err, data) {
+res.end();
 });
-
 });
-
-
 
 app.listen(PORT, function() {
   console.log("burger app listening on port", PORT);

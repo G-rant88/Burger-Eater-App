@@ -1,13 +1,14 @@
+
 <img id="burgimg" src="/assets/img/burger.jpg">
 <h1>Eat Dat Burg!</h1>
 
 <ul class="left">
   <li>
-    {{#each burgers}}
-    <form action="/dev" method="POST">
+    {{#each Dev.devn}}
+    <form>
     <p class="burghere"><span class="borders">
       {{id}}. {{burger_name}}</span>
-      <button class="waves-effect waves-light btn" name="{{id}}" class="delburg">Devour it!</button>
+      <button class="waves-effect waves-light btn devburg" id={{id}}>Devour it!</button>
     </p>
   </form>
   {{/each}}
@@ -15,7 +16,7 @@
 </ul>
 
 <ul class="right">
-  {{#each burgseat}}
+  {{#each Dev.devy}}
   <li>
     <p class="burgdev">
       {{id}}. {{burger_name}}
@@ -25,7 +26,31 @@
 </ul>
 
 <form id="addburg" class="input-field col s6" action="/add" method="POST">
-<textarea class="materialize-textarea" type="text" name="burgeradd" placeholder="Big Mac"></textarea>
+<textarea class="materialize-textarea" type="text" name="burgeradd" placeholder="Burger Name"></textarea>
   <button class="waves-effect waves-light btn" type="submit" id="burgsub"/>Submit</button>
 </form>
 <p id="p1">Enter the burger you want to eat and click Submit!</p>
+
+<script type="text/javascript">
+  
+ $(".devburg").on("click", function(event) {
+
+    var id = $(this).attr("id");
+    console.log(id);
+    var dats ={
+      ids: id
+    }
+    // Send the PUT request.s
+    $.ajax("/devs/" + id, {
+      type: "PUT",
+      data: dats
+    }).then(
+      function() {
+        console.log("devoured at id ", id);
+        location.reload();
+      }
+    );
+  });
+
+
+</script>
