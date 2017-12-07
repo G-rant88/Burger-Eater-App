@@ -87,3 +87,10 @@ h1{
 	font-size: 20px;
 
 }
+
+.border2{
+
+	border-left: 2px solid black;
+	color: orange;
+	padding-left: 5px;
+}

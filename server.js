@@ -69,12 +69,35 @@ yes.push(data[i]);
 
 app.post("/add", function(req, res){
 
-	connection.query("INSERT INTO burgers (burger_name) VALUES (?)", [req.body.burgeradd], function(err, data) {
+	connection.query("INSERT INTO burgers (burger_name, ingredients) VALUES (?, ?)", [req.body.burgeradd, req.body.burgering], function(err, data) {
 
 	res.redirect("/");
 });
 
 });
+
+app.get("/:id",function(req, res){
+  connection.query("SELECT * FROM burgers where id =?;", [req.params.id], function(err, data) {
+console.log(data[0]);
+
+res.render("update-page", data[0]);
+
+})
+
+});
+
+ app.put("/ups",function(req, res){
+
+console.log(req.body);
+
+connection.query("UPDATE burgers SET burger_name = ?, ingredients = ? WHERE id =?", [req.body.burgs, req.body.ings, req.body.ids], function(err, data) {
+
+console.log(err);
+ res.end();
+
+});
+});
+
 
 app.put("/devs/:id", function(req, res){
 
