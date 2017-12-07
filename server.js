@@ -26,7 +26,7 @@ connection = mysql.createConnection({
   host: "localhost",
   user: "Ben",
   password: "bgrant88",
-  database: "burgers_db"
+  database: "burgersdb2"
 });
 
 }
