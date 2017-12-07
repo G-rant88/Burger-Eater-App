@@ -8,7 +8,7 @@
   <li>
     {{#each Dev.devn}}
     <form>
-    <p class="burghere"><span class="borders z-depth-4" id="draggable" value={{id}}>
+    <p class="burghere"><span class="borders z-depth-4 drag" id="draggable" value={{id}}>
       {{id}}. {{burger_name}}</span>
      <!--  <button class="waves-effect waves-light btn devburg z-depth-5 cyan pulse" id={{id}}>Devour it!</button> -->
     </p>
@@ -19,7 +19,7 @@
 
   <div class="dropborder right center-align" id="droppable">
     <ul>
-  <p id="devy">Devour IT!</p>
+  <p id="devy">DEVOUR IT!</p>
   {{#each Dev.devy}}
    <!--  <p> --><!-- <button class="waves-effect waves-light btn regburg z-depth-5 orange pulse" id={{id}}>Regurgitate it!</button>  -->
       <li class="borders z-depth-4 burgdev"">
@@ -41,7 +41,7 @@
 
   var dropflag = false;
   
- $("#draggable").on("click", function(event) {
+ $(".drag").on("click", function(event) {
 
 if(dropflag === true){
 
@@ -111,14 +111,14 @@ if(dropflag === true){
 
 
 $( function() {
-    $("#draggable").draggable();
+    $(".drag").draggable();
     $("#droppable").droppable(
     {
       drop: function( event, ui ) {
         $( this )
           .addClass( "ui-state-highlight" )
           .find( "p" )
-            .html( "Devoured!" );
+            .html( "DEVOURED!" );
             dropflag = true;
   }
     });
