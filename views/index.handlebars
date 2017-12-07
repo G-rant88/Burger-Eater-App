@@ -1,43 +1,52 @@
-
+<div class="row">
 <img id="burgimg" src="/assets/img/burger.jpg">
 <h1>Eat Dat Burg!</h1>
 <div><button class="waves-effect waves-light btn z-depth-5 red" type="button" id="bathroom"/>Go To Bathroom</button></div>
-
+</div>
+<div class="row">
 <ul class="left">
   <li>
     {{#each Dev.devn}}
     <form>
-    <p class="burghere"><span class="borders z-depth-4">
+    <p class="burghere"><span class="borders z-depth-4" id="draggable" value={{id}}>
       {{id}}. {{burger_name}}</span>
-      <button class="waves-effect waves-light btn devburg z-depth-5 cyan pulse" id={{id}}>Devour it!</button>
+     <!--  <button class="waves-effect waves-light btn devburg z-depth-5 cyan pulse" id={{id}}>Devour it!</button> -->
     </p>
   </form>
   {{/each}}
   </li>
 </ul>
 
-<ul class="right">
+  <div class="dropborder right center-align" id="droppable">
+    <ul>
+  <p id="devy">Devour IT!</p>
   {{#each Dev.devy}}
-  <li>
-    <p><button class="waves-effect waves-light btn regburg z-depth-5 orange pulse" id={{id}}>Regurgitate it!</button> <span class="borders z-depth-4 burgdev"">
-      {{id}}. {{burger_name}}</span>
-    </p>
-  </li>
+   <!--  <p> --><!-- <button class="waves-effect waves-light btn regburg z-depth-5 orange pulse" id={{id}}>Regurgitate it!</button>  -->
+      <li class="borders z-depth-4 burgdev"">
+      {{id}}. {{burger_name}}</li>
+<!--     </p> -->
   {{/each}}
 </ul>
-<form id="addburg" class="input-field col s6" action="/add" method="POST">
+</div>
+</div>
+<div class="row2 center-align">
+<form id="addburg" class="input-field col s6 center-align" action="/add" method="POST">
 <textarea class="materialize-textarea" type="text" name="burgeradd" placeholder="Burger Name"></textarea>
   <button class="waves-effect waves-light btn z-depth-5" type="submit" id="burgsub"/>Submit</button>
+  <p id="p1" class="center-align">Enter the burger you want to eat and click Submit!</p>
 </form>
-<p id="p1">Enter the burger you want to eat and click Submit!</p>
 
+</div>
 <script type="text/javascript">
+
+  var dropflag = false;
   
- $(".devburg").on("click", function(event) {
+ $("#draggable").on("click", function(event) {
+
+if(dropflag === true){
 
   Materialize.toast('YUM!', 100000);
-
-    var id = $(this).attr("id");
+    var id = $(this).attr("value");
     console.log(id);
     var dats ={
       ids: id
@@ -49,9 +58,12 @@
     }).then(
       function() {
         console.log("devoured at id ", id);
+        dropflag = false;
         location.reload();
+
       }
     );
+  }
   });
 
  $("#burgsub").on("click", function(event) {
@@ -96,5 +108,21 @@
       }
     );
   });
+
+
+$( function() {
+    $("#draggable").draggable();
+    $("#droppable").droppable(
+    {
+      drop: function( event, ui ) {
+        $( this )
+          .addClass( "ui-state-highlight" )
+          .find( "p" )
+            .html( "Devoured!" );
+            dropflag = true;
+  }
+    });
+ 
+});
 
 </script>

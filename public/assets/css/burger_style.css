@@ -66,4 +66,24 @@ h1{
 
 	text-align: center;
 	margin-right: 130px;
+
+}
+
+.dropborder{
+
+	border: 2px solid black;
+	padding: 150px;
+	padding-top: 20px;
+
+}
+
+.ui-state-highlight{
+
+	color: red;
+}
+
+#devy{
+
+	font-size: 20px;
+
 }
