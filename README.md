@@ -1,7 +1,7 @@
 <h1>Welcome to Burger Eater 3000</h1>
 
 <p>the deployed app is <a href="https://burger-eater3000.herokuapp.com/" target="_blank">HERE</a></p>
-<p>Version 2 Of The App is <a href="https://burgerapp-version2.herokuapp.com/" target="_blank">HERE</p>
+<p>Version 2 Of The App is <a href="https://burgerapp-version2.herokuapp.com/" target="_blank">HERE</a></p>
 	
 <p>All the data is tied to my mysql db.</p>
 
