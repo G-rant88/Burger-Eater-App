@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `burgers`;
 CREATE TABLE `burgers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `burger_name` varchar(50) DEFAULT NULL,
-  'ingredients' varchar(500) DEFAULT NULL,
+  `ingredients` varchar(500) DEFAULT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `devoured` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
