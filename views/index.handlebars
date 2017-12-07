@@ -1,8 +1,9 @@
-
+<div class="row">
 <img id="burgimg" src="/assets/img/burger.jpg">
 <h1>Eat Dat Burg!</h1>
 <div><button class="waves-effect waves-light btn z-depth-5 red" type="button" id="bathroom"/>Go To Bathroom</button></div>
-
+</div>
+<div class="row">
 <ul class="left">
   <li>
     {{#each Dev.devn}}
@@ -25,11 +26,18 @@
   </li>
   {{/each}}
 </ul>
-<form id="addburg" class="input-field col s6" action="/add" method="POST">
-<textarea class="materialize-textarea" type="text" name="burgeradd" placeholder="Burger Name"></textarea>
+</div>
+<div class="row">
+<form id="addburg" class="input-field" action="/add" method="POST">
+  <div>
+  <i class="material-icons prefix">mode_edit</i>
+<textarea class="materialize-textarea" type="text" name="burgeradd"></textarea>
+<label for="icon_prefix2">Burger Name</label>
   <button class="waves-effect waves-light btn z-depth-5" type="submit" id="burgsub"/>Submit</button>
+</div>
 </form>
 <p id="p1">Enter the burger you want to eat and click Submit!</p>
+</div>
 
 <script type="text/javascript">
   
