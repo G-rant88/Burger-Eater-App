@@ -2,7 +2,18 @@
 
 <p>the deployed app is <a href="https://burger-eater3000.herokuapp.com/" target="_blank">HERE</a></p>
 <p>Version 2 Of The App is <a href="https://burgerapp-version2.herokuapp.com/" target="_blank">HERE</a></p>
-	
+
+<p>The new branch v3 is the updated app. V3 updates:</p>
+
+<ul>
+	<li>when you go to the app you will be sent to a login page</li>
+	<li>If you do not already have an account you will have to sign up</li>
+	<li>Once logged in with your user/pw you will be sent to the home page</li>
+	<li>All of your burgers will be stored to your user specific table</li>
+	<li>You can log out on the home page and will be sent to the login page</li>
+	<li>If you login with the same account all of your burgers will be saved</li>
+</ul>
+
 <p>All the data is tied to my mysql db.</p>
 
 <p>After adding a new burger it will appear on the left side list with a "DEVOUR IT" button next to it.</p>
