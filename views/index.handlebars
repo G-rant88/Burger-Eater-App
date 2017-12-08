@@ -46,6 +46,7 @@
 </div>
 </form>
 <p id="p1">Enter the burger you want to eat and click Submit!</p>
+<p id="p2"></p>
 </div>
 
 <script type="text/javascript">
@@ -77,6 +78,13 @@
   });
 
  $("#burgsub").on("click", function(event) {
+
+ 	if ($("#adds").val() === ""){
+
+ 		$("#p2").html("Burger Name cannot be empty!");
+ 		$("#p2").css("color", "red");
+ 		return false;
+ 	}
 
   Materialize.toast('Oh Yeah!', 100000);
 
