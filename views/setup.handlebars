@@ -1,0 +1,94 @@
+<div id="size" class="row">
+  <style type="text/css">
+    #size{
+      margin-top: 15%;
+      color: dodgerblue
+    }
+
+    body{
+      background-color: lemonchiffon;
+    }
+  </style>
+  <div class="col s2"></div>
+  <div id="logins" class="col s8 center-align">
+      <h4>Welcome to Eat Dat Burg</h4>
+      <p id="print">Please Create an Account to Get Started</p>
+<form id="users" class="input-field">
+  <div>
+  <i class="material-icons prefix">account_circle</i>
+<textarea class="materialize-textarea" id="name" type="text"></textarea>
+<label for="icon_prefix2">Username</label>
+</div>
+</form>
+<form id="pws" class="input-field">
+<div>
+  <i class="material-icons prefix">fingerprint</i>
+<textarea class="materialize-textarea" id="pw" type="text"></textarea>
+<label for="icon_prefix2">Password</label>
+</div>
+</form>
+    <div>
+      <a id="sign" class="waves-effect waves-green btn-flat">Create Account</a>
+    </div>
+  </div>
+  <div class="col s2"></div>
+</div>
+
+<script type="text/javascript">
+
+$("#sign").on("click", function(event){
+
+  var namey = $("#name").val();
+  var pwy = $("#pw").val();
+
+    if(namey === "" || pwy === ""){
+
+    $("#print").html("Username and Password are required");
+   $("#print").css("color", "red");
+    return false;
+  }
+
+  var user = $("#name").val().trim();
+    var pw = $("#pw").val().trim();
+
+     console.log(user);
+    console.log(pw);
+ $.ajax("/sets", {
+      type: "POST"
+    }).then(
+      function(data) {
+
+        console.log(data);
+
+        for (var i = 0; i < data.datas.length; i++) {
+          
+      if (data.datas[i].username === user) {
+        console.log(data.datas[i].username);
+        console.log(user);
+
+            $("#print").html("Username is taken");
+   $("#print").css("color", "red");
+   return false;
+   
+      }
+      }
+  
+    var info ={
+      users: user,
+      pws: pw
+    }
+    $.ajax("/signs/", {
+      type: "POST",
+      data: info
+    }).then(
+      function() {
+        location.assign("/");
+  
+      }
+    );
+    }
+    );
+  });
+
+</script>
+

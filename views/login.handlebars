@@ -1,0 +1,93 @@
+<div id="size" class="row">
+  <style type="text/css">
+    #size{
+      margin-top: 15%;
+      color: dodgerblue
+    }
+
+    body{
+      background-color: lemonchiffon;
+    }
+  </style>
+  <div class="col s2"></div>
+  <div id="logins" class="col s8 center-align">
+      <h4>Welcome to Eat Dat Burg</h4>
+      <p id="print">Please Create an Account or Login Below</p>
+<form id="users" class="input-field">
+  <div>
+  <i class="material-icons prefix">account_circle</i>
+<textarea class="materialize-textarea" id="name" type="text"></textarea>
+<label for="icon_prefix2">Username</label>
+</div>
+</form>
+<form id="pws" class="input-field">
+<div>
+  <i class="material-icons prefix">fingerprint</i>
+<textarea class="materialize-textarea" id="pw" type="text"></textarea>
+<label for="icon_prefix2">Password</label>
+</div>
+</form>
+
+    <div>
+      <a href="/signup" id="sign" class="waves-effect waves-green btn-flat">Sign Up</a>
+      <button type="button" class="waves-effect waves-green btn-flat" id="logs">Login</button>
+    </div>
+  </div>
+  <div class="col s2"></div>
+</div>
+<script type="text/javascript">
+
+$("#logs").on("click", function(event){
+
+  var namey = $("#name").val();
+  var pwy = $("#pw").val();
+
+  if(namey === "" || pwy === ""){
+
+    $("#print").html("Username and Password are required");
+   $("#print").css("color", "red");
+    return false;
+  }
+
+   var user = $("#name").val().trim();
+    var pw = $("#pw").val().trim();
+
+    console.log(user);
+    console.log(pw);
+
+    var info ={
+      users: user,
+      pws: pw
+    }
+    $.ajax("/users/", {
+      type: "POST",
+      data: info
+    }).then(
+    
+      function(data) {
+        var flag = false;
+        console.log(data);
+        console.log(data.reqs.users);
+        console.log(data.reqs.pws);
+        console.log(data.reqs.id);
+        console.log(data.daty[0].username);
+        console.log(data.daty[0].password);
+
+        for (var i = 0; i < data.daty.length; i++) {
+      if (data.daty[i].username === data.reqs.users && data.daty[i].password === data.reqs.pws && flag === false){
+        flag = true;
+           var userid = data.daty[i].id
+           location.assign("/home/" + userid);
+}
+      }
+    
+    if(flag === false){
+        $("#print").html("Wrong Username/Password");
+        $("#print").css("color", "red");
+      }
+      }
+    );
+  });
+
+</script>
+

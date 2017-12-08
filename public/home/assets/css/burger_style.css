@@ -67,3 +67,14 @@ h1{
 	text-align: center;
 	margin-right: 130px;
 }
+#wrongs{
+
+	color: red;
+}
+
+.welcome{
+font-size: 45px;
+color: teal;
+text-shadow: 3px 3px lightgray;
+	
+}
