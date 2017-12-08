@@ -8,11 +8,11 @@
   <li>
     {{#each Dev.devn}}
     <form>
-    <p class="burghere"><span class="borders z-depth-4 drag" id="draggable" value={{id}}>
+    <p class="burghere"><span class="borders z-depth-4 drag" id="draggable" data-id={{id}}>
       {{id}}. {{burger_name}} <a class="border2" href="{{id}}">Update Burger</a></span>
      <!--  <button class="waves-effect waves-light btn devburg z-depth-5 cyan pulse" id={{id}}>Devour it!</button> -->
     </p>
-    <p class="inghere" value={{id}}>Ingredients: {{ingredients}}</p>
+    <p class="inghere" data-id={{id}}>Ingredients: {{ingredients}}</p>
   </form>
   {{/each}}
   </li>
@@ -50,12 +50,22 @@
 $(".inghere").hide();
 
 
-$(".drag").hover(function(event){
+$(".drag").hover( function(){
+
+
+
+ if ($(this).attr("data-id") === $(".inghere").attr("data-id")){
 
 $(".inghere").show();
 
+}
+else{
+
+	$(".inghere").hide();
+}
 
 });
+
 
   var dropflag = false;
   
