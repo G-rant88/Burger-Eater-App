@@ -70,15 +70,17 @@ app.get("/home/:id", function(req, res){
 
  var userid = JSON.parse(req.params.id);
  var name ="";
+var namey="";
 
  connection.query("SELECT * FROM users where id =?;", [userid], function(err, data) {
 
 
 name = data[0].username;
+namey = name.replace(/\s+/g, "").toLowerCase();
 
-});
 
-connection.query("SELECT * FROM burgers;", function(err, data) {
+connection.query("SELECT * FROM burgers_"+namey+";", function(err, data) {
+
  
  var yes = [];
 var not = [];
@@ -107,18 +109,21 @@ console.log(Dev);
 
 });
 
+});
+
 app.post("/add", function(req, res){
 
-	connection.query("INSERT INTO burgers (burger_name) VALUES (?)", [req.body.burgeradd], function(err, data) {
+	connection.query("INSERT INTO burgers_"+req.body.names+" (burger_name) VALUES (?)", [req.body.burgeradd], function(err, data) {
 
-	res.redirect("/home");
+	res.end();
 });
 
 });
 
 app.put("/devs/:id", function(req, res){
 
-	connection.query("UPDATE burgers SET devoured = ? WHERE id = ?", [true, req.body.ids], function(err, data) {
+
+	connection.query("UPDATE burgers_"+req.body.names+" SET devoured = ? WHERE id = ?", [true, req.body.ids], function(err, data) {
 res.end();
 });
 });
@@ -126,14 +131,14 @@ res.end();
 
 app.put("/reg/:id", function(req, res){
 
-  connection.query("UPDATE burgers SET devoured = ? WHERE id = ?", [false, req.body.ids], function(err, data) {
+  connection.query("UPDATE burgers_"+req.body.names+" SET devoured = ? WHERE id = ?", [false, req.body.ids], function(err, data) {
 res.end();
 });
 });
 
 app.delete("/del/", function(req, res){
 
-  connection.query("DELETE FROM burgers where devoured =? ", [true], function(err, data) {
+  connection.query("DELETE FROM burgers_"+req.body.names+" where devoured =? ", [true], function(err, data) {
 console.log("emptied");
 res.end();
 });
@@ -167,9 +172,29 @@ app.post("/signs", function(req, res){
 
 console.log(req.body.users);
 console.log(req.body.pws);
+   var user = req.body.users.replace(/\s+/g, "").toLowerCase();
+
   connection.query("INSERT INTO users (username, password) VALUES (?, ?);", [req.body.users, req.body.pws], function(err, data) {
-  res.end();
+
 });
+
+connection.query("CREATE TABLE burgers_"+user+" (`id` int(11) NOT NULL AUTO_INCREMENT, `burger_name` varchar(50) DEFAULT NULL, `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, `devoured` tinyint(1) NOT NULL DEFAULT '0', PRIMARY KEY (`id`));", function(err, data) {
+
+});
+
+connection.query("INSERT INTO burgers_"+user+" (burger_name) values ('Double-Double'), ('Big Mac'), ('Whopper');", function(err, data) {
+
+});
+
+res.end();
+
+});
+
+
+
+app.get("*",function(req, res){
+
+res.render("login");
 
 });
 

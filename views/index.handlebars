@@ -1,6 +1,14 @@
 <div class="row">
 <img id="burgimg" src="/home/assets/img/burger.jpg">
-<h2 class="welcome">Welcome {{Dev.user}}!</h2>
+<div>
+<h2 class="welcome" id="{{Dev.user}}">Welcome {{Dev.user}}! <a href="/" class="waves-effect waves-light btn z-depth-5" id="logout"/>Log Out</a></h2> 
+<style type="text/css">
+  #logout{
+
+    text-shadow: 0px 0px black;
+  }
+</style>
+</div>
 <h1>Eat Dat Burg!</h1>
 <div><button class="waves-effect waves-light btn z-depth-5 red" type="button" id="bathroom"/>Go To Bathroom</button></div>
 </div>
@@ -29,10 +37,10 @@
 </ul>
 </div>
 <div class="row">
-<form id="addburg" class="input-field" action="/add" method="POST">
+<form id="addburg" class="input-field">
   <div>
   <i class="material-icons prefix">mode_edit</i>
-<textarea class="materialize-textarea" type="text" name="burgeradd"></textarea>
+<input class="materialize-textarea" type="text" name="burgeradd" id="adds"></input>
 <label for="icon_prefix2">Burger Name</label>
   <button class="waves-effect waves-light btn z-depth-5" type="submit" id="burgsub"/>Submit</button>
 </div>
@@ -48,9 +56,13 @@
   Materialize.toast('YUM!', 100000);
 
     var id = $(this).attr("id");
+    var name1 = $(".welcome").attr("id");
+    var namey = name1.replace(/\s+/g, "").toLowerCase();
     console.log(id);
+    console.log(namey);
     var dats ={
-      ids: id
+      ids: id,
+      names: namey
     }
     // Send the PUT request.s
     $.ajax("/devs/" + id, {
@@ -68,6 +80,26 @@
 
   Materialize.toast('Oh Yeah!', 100000);
 
+  var burg = $("#adds").val().trim();
+var name1 = $(".welcome").attr("id");
+    var namey = name1.replace(/\s+/g, "").toLowerCase();
+  var dats = {
+
+    burgeradd: burg,
+    names: namey
+
+  }
+
+     $.ajax("/add", {
+      type: "POST",
+      data: dats
+    }).then(
+      function() {
+        console.log("added burger ", burg);
+        location.reload();
+      }
+    );
+
 });
 
 
@@ -76,9 +108,12 @@
   Materialize.toast('GROSS!', 100000);
 
     var id = $(this).attr("id");
+   var name1 = $(".welcome").attr("id");
+    var namey = name1.replace(/\s+/g, "").toLowerCase();
     console.log(id);
     var dats ={
-      ids: id
+      ids: id,
+      names: namey
     }
     // Send the PUT request.s
     $.ajax("/reg/" + id, {
@@ -95,10 +130,16 @@
     $("#bathroom").on("click", function(event) {
 
   Materialize.toast('EMPTIED OUT!', 100000);
+ var name1 = $(".welcome").attr("id");
+    var namey = name1.replace(/\s+/g, "").toLowerCase();
+ var dats ={
+      names: namey
+    }
 
     // Send the PUT request.s
     $.ajax("/del/", {
-      type: "DELETE"
+      type: "DELETE",
+      data: dats
     }).then(
       function() {
         console.log("emptied out");
