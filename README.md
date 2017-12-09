@@ -12,6 +12,7 @@
 	<li>All of your burgers will be stored to your user specific table</li>
 	<li>You can log out on the home page and will be sent to the login page</li>
 	<li>If you login with the same account all of your burgers will be saved</li>
+	<li>If you login and quit the app without logging out when you come back to it you will be logged in with your account automatically.</li>
 </ul>
 
 <p>All the data is tied to my mysql db.</p>
