@@ -156,5 +156,10 @@ var name1 = $(".welcome").attr("id");
     );
   });
 
+$("#logout").on("click", function(event){
+
+    Cookies.remove('name');
+});
+
 </script>
 

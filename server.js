@@ -60,6 +60,19 @@ res.json(users);
 })
  });
 
+app.get("/check", function(req, res){
+
+   connection.query("SELECT * FROM users;", function(err, data) {
+
+var users = {
+
+  datas: data
+}
+
+res.json(users);
+})
+ });
+
 
 app.get("/home/:id", function(req, res){
 

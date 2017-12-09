@@ -59,6 +59,29 @@
 
 <script type="text/javascript">
 
+$( document ).ready(function() {
+   
+$.ajax("/check", {
+      type: "GET"
+    }).then(
+      function(data) {
+
+var cook = Cookies.get('name');
+
+console.log(cook);
+
+for (var i = 0; i < data.datas.length; i++) {
+
+if (data.datas[i].username === cook) {
+
+  var userid = data.datas[i].id;
+  location.assign("/home/" + userid);
+
+}
+}
+});
+  });
+
 $("#logs").on("click", function(event){
 
   var namey = $("#name").val();
@@ -74,6 +97,8 @@ $("#logs").on("click", function(event){
    var user = $("#name").val().trim();
     var pw = $("#pw").val().trim();
 
+      Cookies.set('name', user);
+  
     console.log(user);
     console.log(pw);
 
