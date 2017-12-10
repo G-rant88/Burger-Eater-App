@@ -1,7 +1,6 @@
 <h1>Welcome to Burger Eater 3000</h1>
 
 <p>the deployed app is <a href="https://burger-eater3000.herokuapp.com/" target="_blank">HERE</a></p>
-<p>Version 2 Of The App is <a href="https://burgerapp-version2.herokuapp.com/" target="_blank">HERE</a></p>
 
 <p>The new branch v3 is the updated app. V3 updates:</p>
 
@@ -23,7 +22,9 @@
 
 <p>Devouring updates the db to set the devoured property to true.</p>
 
-<p>Adding a burger inserts a new burger into the db.</p>
+<p>Adding a burger with ingredients inserts a new burger and its ingredients into the db.</p>
+
+<p>Updating the burger allows you to change the name and ingredients of that burger on a separate page that will update your burger table.</p>
 
 <p>Regurgitating sets the devoured to false and puts it on the left side.</p>
 
