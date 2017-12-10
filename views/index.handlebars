@@ -1,17 +1,29 @@
-<div class="row">
-<img id="burgimg" src="/assets/img/burger.jpg">
+<div class="row" id="row1">
+<img id="burgimg" src="/home/assets/img/burger.jpg">
+<div class="holder" id="{{Dev.id}}">
+<h2 class="welcome" id="{{Dev.user}}">Welcome {{Dev.user}}! <a href="/" class="waves-effect waves-light btn z-depth-5" id="logout"/>Log Out</a></h2> 
+<style type="text/css">
+  #logout{
+
+    text-shadow: 0px 0px black;
+  }
+</style>
+</div>
 <h1>Eat Dat Burg!</h1>
 <div><button class="waves-effect waves-light btn z-depth-5 red" type="button" id="bathroom"/>Go To Bathroom</button></div>
 </div>
-<div class="row">
+<div class="row" id="row2">
 <ul class="left">
   <li>
     {{#each Dev.devn}}
     <form>
     <p class="burghere"><span class="borders z-depth-4">
-      {{id}}. {{burger_name}}</span>
+      {{id}}. {{burger_name}} <button type="button" class="border2 ups" data-id="{{id}}">Update Burger</button>
+    </span>
       <button class="waves-effect waves-light btn devburg z-depth-5 cyan pulse" id={{id}}>Devour it!</button>
-    </p>
+      </p> 
+    <p>Ingredients: {{ingredients}}</p>
+   
   </form>
   {{/each}}
   </li>
@@ -28,27 +40,42 @@
 </ul>
 </div>
 <div class="row">
-<form id="addburg" class="input-field" action="/add" method="POST">
+<form id="addburg" class="input-field">
   <div>
   <i class="material-icons prefix">mode_edit</i>
-<textarea class="materialize-textarea" type="text" name="burgeradd"></textarea>
+<input class="materialize-textarea" type="text" name="burgeradd" id="adds"></input>
 <label for="icon_prefix2">Burger Name</label>
-  <button class="waves-effect waves-light btn z-depth-5" type="submit" id="burgsub"/>Submit</button>
 </div>
 </form>
-<p id="p1">Enter the burger you want to eat and click Submit!</p>
-</div>
+<form class="input-field">
+          <i class="material-icons prefix">format_list_numbered</i>
+          <input id="ings" type="tel" class="validate" name="burgering"></input>
+ 
+      <label for="icon_telephone">Ingredients</label>
+       </form>   
 
+
+  <button class="waves-effect waves-light btn z-depth-5" type="submit" id="burgsub"/>Submit</button>
+
+<p id="p1">Enter the burger you want to eat and click Submit!</p>
+<p id="p2"></p>
+</div>
+</div>
 <script type="text/javascript">
+
   
  $(".devburg").on("click", function(event) {
 
   Materialize.toast('YUM!', 100000);
 
     var id = $(this).attr("id");
+    var name1 = $(".welcome").attr("id");
+    var namey = name1.replace(/\s+/g, "").toLowerCase();
     console.log(id);
+    console.log(namey);
     var dats ={
-      ids: id
+      ids: id,
+      names: namey
     }
     // Send the PUT request.s
     $.ajax("/devs/" + id, {
@@ -64,7 +91,36 @@
 
  $("#burgsub").on("click", function(event) {
 
+ 	if ($("#adds").val() === "" ||  $("#ings").val() === ""){
+
+ 		$("#p2").html("Burger Name and Ingredients cannot be empty!");
+ 		$("#p2").css("color", "red");
+ 		return false;
+ 	}
+
   Materialize.toast('Oh Yeah!', 100000);
+
+  var burg = $("#adds").val().trim();
+  var ing = $("#ings").val().trim();
+var name1 = $(".welcome").attr("id");
+    var namey = name1.replace(/\s+/g, "").toLowerCase();
+  var dats = {
+
+    burgeradd: burg,
+    burgering: ing,
+    names: namey
+
+  }
+
+     $.ajax("/add", {
+      type: "POST",
+      data: dats
+    }).then(
+      function() {
+        console.log("added burger ", burg);
+        location.reload();
+      }
+    );
 
 });
 
@@ -74,11 +130,14 @@
   Materialize.toast('GROSS!', 100000);
 
     var id = $(this).attr("id");
+   var name1 = $(".welcome").attr("id");
+    var namey = name1.replace(/\s+/g, "").toLowerCase();
     console.log(id);
     var dats ={
-      ids: id
+      ids: id,
+      names: namey
     }
-    // Send the PUT request.s
+
     $.ajax("/reg/" + id, {
       type: "PUT",
       data: dats
@@ -93,10 +152,16 @@
     $("#bathroom").on("click", function(event) {
 
   Materialize.toast('EMPTIED OUT!', 100000);
+ var name1 = $(".welcome").attr("id");
+    var namey = name1.replace(/\s+/g, "").toLowerCase();
+ var dats ={
+      names: namey
+    }
 
     // Send the PUT request.s
     $.ajax("/del/", {
-      type: "DELETE"
+      type: "DELETE",
+      data: dats
     }).then(
       function() {
         console.log("emptied out");
@@ -105,4 +170,23 @@
     );
   });
 
+$("#logout").on("click", function(event){
+
+    Cookies.remove('name');
+});
+
+
+$(".ups").on("click", function(event) {
+console.log(user);
+
+var userid = $(".holder").attr("id");
+var ids = $(this).data("id");
+var user = $(".welcome").attr("id");
+var users = user.replace(/\s+/g, "").toLowerCase();
+
+location.assign("/ups/"+userid+"/"+users+"/"+ids+"");
+
+});
+
 </script>
+
