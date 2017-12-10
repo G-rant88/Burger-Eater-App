@@ -121,7 +121,7 @@ console.log(Dev);
 
 app.post("/add", function(req, res){
 
-	connection.query("INSERT INTO burgers_"+req.body.names+" (burger_name) VALUES (?)", [req.body.burgeradd], function(err, data) {
+	connection.query("INSERT INTO burgers_"+req.body.names+" (burger_name, ingredients) VALUES (?, ?)", [req.body.burgeradd, req.body.burgering], function(err, data) {
 
 	res.end();
 });
@@ -149,6 +149,21 @@ app.delete("/del/", function(req, res){
   connection.query("DELETE FROM burgers_"+req.body.names+" where devoured =? ", [true], function(err, data) {
 console.log("emptied");
 res.end();
+});
+});
+
+ app.put("/ups",function(req, res){
+
+console.log(req.body);
+
+var use = req.body.users;
+var user = use.replace(/\s+/g, "").toLowerCase();
+
+connection.query("UPDATE burgers_"+user+" SET burger_name = ?, ingredients = ? WHERE id =?", [req.body.burgs, req.body.ings, req.body.ids], function(err, data) {
+
+console.log(err);
+ res.end();
+
 });
 });
 
@@ -186,7 +201,7 @@ console.log(req.body.pws);
 
 });
 
-connection.query("CREATE TABLE burgers_"+user+" (`id` int(11) NOT NULL AUTO_INCREMENT, `burger_name` varchar(50) DEFAULT NULL, , ingredients varchar(250) DEFAULT NULL, `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, `devoured` tinyint(1) NOT NULL DEFAULT '0', PRIMARY KEY (`id`));", function(err, data) {
+connection.query("CREATE TABLE burgers_"+user+" (`id` int(11) NOT NULL AUTO_INCREMENT, `burger_name` varchar(100) DEFAULT NULL, ingredients varchar(250) DEFAULT NULL, `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, `devoured` tinyint(1) NOT NULL DEFAULT '0', PRIMARY KEY (`id`));", function(err, data) {
 
 });
 
@@ -198,7 +213,23 @@ res.end();
 
 });
 
+app.get("/ups/:user/:id",function(req, res){
 
+  connection.query("SELECT * FROM burgers_"+req.params.user+" where id =?;", [req.params.id], function(err, data) {
+console.log(data[0]);
+
+var obj = {
+
+  user: req.params.user,
+  data: data[0]
+}
+
+console.log(obj);
+res.render("update-page", {obj});
+
+});
+
+});
 
 app.get("*",function(req, res){
 

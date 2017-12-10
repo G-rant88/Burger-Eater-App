@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" id="row1">
 <img id="burgimg" src="/home/assets/img/burger.jpg">
 <div>
 <h2 class="welcome" id="{{Dev.user}}">Welcome {{Dev.user}}! <a href="/" class="waves-effect waves-light btn z-depth-5" id="logout"/>Log Out</a></h2> 
@@ -12,16 +12,18 @@
 <h1>Eat Dat Burg!</h1>
 <div><button class="waves-effect waves-light btn z-depth-5 red" type="button" id="bathroom"/>Go To Bathroom</button></div>
 </div>
-<div class="row">
+<div class="row" id="row2">
 <ul class="left">
   <li>
     {{#each Dev.devn}}
     <form>
     <p class="burghere"><span class="borders z-depth-4">
-      {{id}}. {{burger_name}}<br>
-      {{ingredients}}</span>
+      {{id}}. {{burger_name}} <button type="button" class="border2 ups" data-id="{{id}}">Update Burger</button>
+    </span>
       <button class="waves-effect waves-light btn devburg z-depth-5 cyan pulse" id={{id}}>Devour it!</button>
-    </p>
+      </p> 
+    <p>Ingredients: {{ingredients}}</p>
+   
   </form>
   {{/each}}
   </li>
@@ -43,13 +45,22 @@
   <i class="material-icons prefix">mode_edit</i>
 <input class="materialize-textarea" type="text" name="burgeradd" id="adds"></input>
 <label for="icon_prefix2">Burger Name</label>
-  <button class="waves-effect waves-light btn z-depth-5" type="submit" id="burgsub"/>Submit</button>
 </div>
 </form>
+<form class="input-field">
+          <i class="material-icons prefix">format_list_numbered</i>
+          <input id="ings" type="tel" class="validate" name="burgering"></input>
+ 
+      <label for="icon_telephone">Ingredients</label>
+       </form>   
+
+
+  <button class="waves-effect waves-light btn z-depth-5" type="submit" id="burgsub"/>Submit</button>
+
 <p id="p1">Enter the burger you want to eat and click Submit!</p>
 <p id="p2"></p>
 </div>
-
+</div>
 <script type="text/javascript">
 
   
@@ -80,9 +91,9 @@
 
  $("#burgsub").on("click", function(event) {
 
- 	if ($("#adds").val() === ""){
+ 	if ($("#adds").val() === "" ||  $("#ings").val() === ""){
 
- 		$("#p2").html("Burger Name cannot be empty!");
+ 		$("#p2").html("Burger Name and Ingredients cannot be empty!");
  		$("#p2").css("color", "red");
  		return false;
  	}
@@ -90,11 +101,13 @@
   Materialize.toast('Oh Yeah!', 100000);
 
   var burg = $("#adds").val().trim();
+  var ing = $("#ings").val().trim();
 var name1 = $(".welcome").attr("id");
     var namey = name1.replace(/\s+/g, "").toLowerCase();
   var dats = {
 
     burgeradd: burg,
+    burgering: ing,
     names: namey
 
   }
@@ -124,7 +137,7 @@ var name1 = $(".welcome").attr("id");
       ids: id,
       names: namey
     }
-    // Send the PUT request.s
+
     $.ajax("/reg/" + id, {
       type: "PUT",
       data: dats
@@ -160,6 +173,18 @@ var name1 = $(".welcome").attr("id");
 $("#logout").on("click", function(event){
 
     Cookies.remove('name');
+});
+
+
+$(".ups").on("click", function(event) {
+console.log(user);
+
+var ids = $(this).data("id");
+var user = $(".welcome").attr("id");
+var users = user.replace(/\s+/g, "").toLowerCase();
+
+location.assign("/ups/"+users+"/"+ids+"");
+
 });
 
 </script>
