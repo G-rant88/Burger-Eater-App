@@ -240,5 +240,5 @@ res.render("login");
 });
 
 app.listen(PORT, function() {
-  console.log("burger app listening on port", PORT);
+  console.log("burger eating app listening on port", PORT);
 });
