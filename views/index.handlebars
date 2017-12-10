@@ -1,6 +1,6 @@
 <div class="row" id="row1">
 <img id="burgimg" src="/home/assets/img/burger.jpg">
-<div>
+<div class="holder" id="{{Dev.id}}">
 <h2 class="welcome" id="{{Dev.user}}">Welcome {{Dev.user}}! <a href="/" class="waves-effect waves-light btn z-depth-5" id="logout"/>Log Out</a></h2> 
 <style type="text/css">
   #logout{
@@ -179,11 +179,12 @@ $("#logout").on("click", function(event){
 $(".ups").on("click", function(event) {
 console.log(user);
 
+var userid = $(".holder").attr("id");
 var ids = $(this).data("id");
 var user = $(".welcome").attr("id");
 var users = user.replace(/\s+/g, "").toLowerCase();
 
-location.assign("/ups/"+users+"/"+ids+"");
+location.assign("/ups/"+userid+"/"+users+"/"+ids+"");
 
 });
 

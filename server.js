@@ -97,7 +97,8 @@ var not = [];
 
       devy: yes,
       devn: not,
-      user: name
+      user: name,
+      id: userid
     }
 
 for (var i = 0; i < data.length; i++) {
@@ -213,7 +214,7 @@ res.end();
 
 });
 
-app.get("/ups/:user/:id",function(req, res){
+app.get("/ups/:userid/:user/:id",function(req, res){
 
   connection.query("SELECT * FROM burgers_"+req.params.user+" where id =?;", [req.params.id], function(err, data) {
 console.log(data[0]);
@@ -221,6 +222,7 @@ console.log(data[0]);
 var obj = {
 
   user: req.params.user,
+  id: req.params.userid,
   data: data[0]
 }
 
