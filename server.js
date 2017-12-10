@@ -186,11 +186,11 @@ console.log(req.body.pws);
 
 });
 
-connection.query("CREATE TABLE burgers_"+user+" (`id` int(11) NOT NULL AUTO_INCREMENT, `burger_name` varchar(50) DEFAULT NULL, `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, `devoured` tinyint(1) NOT NULL DEFAULT '0', PRIMARY KEY (`id`));", function(err, data) {
+connection.query("CREATE TABLE burgers_"+user+" (`id` int(11) NOT NULL AUTO_INCREMENT, `burger_name` varchar(50) DEFAULT NULL, , ingredients varchar(250) DEFAULT NULL, `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, `devoured` tinyint(1) NOT NULL DEFAULT '0', PRIMARY KEY (`id`));", function(err, data) {
 
 });
 
-connection.query("INSERT INTO burgers_"+user+" (burger_name) values ('Double-Double'), ('Big Mac'), ('Whopper');", function(err, data) {
+connection.query("INSERT INTO burgers_"+user+" (burger_name, ingredients) values ('Double-Double', 'double meat, double cheese, lettuce, tomato'), ('Big Mac', 'two patties, special sauce, sesame seed bun'), ('Whopper', 'big patty, lettuce, tomato, onions');", function(err, data) {
 
 });
 
