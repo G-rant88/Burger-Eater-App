@@ -32,5 +32,7 @@
 
 <p>the burgers are ordered by their id in the db.</p>
 
-<p>Have fun eating those burgs!</p>
+<img src="https://media.giphy.com/media/3ohjV6erjAwOVLOfx6/giphy.gif" alt="gif">
+full video demo: (https://www.youtube.com/watch?v=jkgYLyaPF4E)
+
 
